@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MqttAndroid</string>
+    <string name="btn_click">点击按钮进行操作</string>
+    <string name="btn_connect">连接</string>
+    <string name="btn_subscribe">订阅</string>
+    <string name="btn_publish">推送消息</string>
+    <string name="btn_close">断开</string>
+</resources>

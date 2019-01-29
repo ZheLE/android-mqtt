@@ -13,40 +13,38 @@ interface IMqttSubscriber {
     /**
      * 收到消息
      *
-     * @param topic   主题
-     * @param message 消息内容
-     * @param qos     消息策略
+     * @param messageArrived  形参函数
      */
-    fun onMessageArrived(topic: String, message: String?, qos: Int)
+    fun onMessageArrived(messageArrived: (topic: String, message: String?, qos: Int) -> Unit)
 
 
     /**
      * 消息发送完成
      */
-    fun onDeliveryComplete(message: String?)
+    fun onDeliveryComplete(deliveryComplete: (message: String?) -> Unit)
 
     /**
      * 服务器连接成功
      */
-    fun onConnectSuccess()
+    fun onConnectSuccess(connectSuccess: () -> Unit)
 
     /**
      * 服务器连接断开
      */
-    fun onConnectionLost(throwable: Throwable?)
+    fun onConnectionLost(connectLost: (throwable: Throwable?) -> Unit)
 
     /**
      * 服务器连接失败
      */
-    fun onConnectFailed(throwable: Throwable?)
+    fun onConnectFailed(connectFailed: (throwable: Throwable?) -> Unit)
 
     /**
      * 订阅成功
      */
-    fun onSubscriberSuccess()
+    fun onSubscriberSuccess(subscriberSuccess: () -> Unit)
 
     /**
      * 订阅失败
      */
-    fun onSubscriberFailed(exception: Throwable?)
+    fun onSubscriberFailed(subscriberFailed: (exception: Throwable?) -> Unit)
 }

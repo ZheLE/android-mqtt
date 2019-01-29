@@ -28,36 +28,32 @@
 
 * 连接MQTT服务端
 
-      MqttManager.getInstance().connect(object : MqttSubscriber() {
-          override fun onConnectSuccess() {
+      MqttManager.getInstance().connect {
+          onConnectSuccess {
               showTips("服务器连接成功")
           }
-
-          override fun onConnectFailed(throwable: Throwable) {
-              showTips("服务器连接失败：${throwable.message}")
+          onConnectFailed {
+              showTips("服务器连接失败：${it?.message}")
           }
-      })
+      }
 
 
 * 订阅一个话题
 
-      MqttManager.getInstance().subscribe(subscriptionTopic, object : MqttSubscriber() {
-          override fun onSubscriberSuccess() {
+      MqttManager.getInstance().subscribe(subscriptionTopic) {
+          onSubscriberSuccess {
               showTips("订阅成功")
           }
-
-          override fun onSubscriberFailed(exception: Throwable) {
-              showTips("订阅失败：${exception.message}")
+          onSubscriberFailed {
+              showTips("订阅失败：${it?.message}")
           }
-
-          override fun onDeliveryComplete(message: String?) {
-              showTips("消息推送完毕：$message")
+          onDeliveryComplete {
+              showTips("消息推送完毕：$it")
           }
-
-          override fun onConnectionLost(throwable: Throwable) {
+          onConnectionLost {
               showTips("连接已断开")
           }
-      })
+      }
 
 * 推送一条消息
 

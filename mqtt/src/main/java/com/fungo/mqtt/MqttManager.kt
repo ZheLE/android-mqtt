@@ -144,7 +144,7 @@ class MqttManager {
     }
 
     /**
-     * 断开连接
+     * 主动断开连接，不会自动重连
      */
     fun disconnect() {
         try {

@@ -32,11 +32,11 @@ class MqttManager {
                 }
             }
 
-            override fun connectionLost(cause: Throwable) {
+            override fun connectionLost(cause: Throwable?) {
                 mSubscribers.entries.forEach {
                     it.value.onConnectionLost(cause)
                 }
-                LogUtils.d("----> MQTT断开连接, cause = ${cause.message}")
+                LogUtils.d("----> MQTT断开连接, cause = ${cause?.message}")
             }
 
             @Throws(Exception::class)
@@ -59,6 +59,10 @@ class MqttManager {
      * 连接服务器
      */
     fun connect(subscriber: IMqttSubscriber? = null) {
+        if (mqttClient == null) {
+            LogUtils.e("----> MQTT连接失败, 请先初始化MQTT")
+            return
+        }
         try {
             mqttClient?.connect(generateConnectOptions(), null, object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken) {
@@ -75,12 +79,12 @@ class MqttManager {
                     mqttClient?.setBufferOpts(disconnectedBufferOptions)
                 }
 
-                override fun onFailure(asyncActionToken: IMqttToken, exception: Throwable) {
+                override fun onFailure(asyncActionToken: IMqttToken, exception: Throwable?) {
                     subscriber?.onConnectFailed(exception)
                     mSubscribers.entries.forEach {
                         it.value.onConnectFailed(exception)
                     }
-                    LogUtils.d("----> MQTT连接失败, exception = ${exception.message}")
+                    LogUtils.d("----> MQTT连接失败, exception = ${exception?.message}")
                 }
             })
         } catch (ex: MqttException) {
@@ -92,6 +96,14 @@ class MqttManager {
      * 订阅一个话题
      */
     fun subscribe(topic: String, subscriber: IMqttSubscriber) {
+        if (mqttClient == null) {
+            LogUtils.e("----> MQTT订阅失败, 请先初始化MQTT")
+            return
+        }
+        if (!isConnected()) {
+            LogUtils.e("----> MQTT订阅失败, 请先连接服务器")
+            return
+        }
         mSubscribers[topic] = subscriber
         try {
             mqttClient?.subscribe(topic, 0, null, object : IMqttActionListener {
@@ -114,23 +126,19 @@ class MqttManager {
      * 发布消息
      */
     fun publishMessage(topic: String, content: String) {
+        if (mqttClient == null) {
+            LogUtils.e("----> MQTT发布消息失败, 请先初始化MQTT")
+            return
+        }
+        if (!isConnected()) {
+            LogUtils.e("----> MQTT发布消息失败, 请先连接服务器")
+            return
+        }
         try {
             val message = MqttMessage()
             message.payload = content.toByteArray()
             mqttClient?.publish(topic, message)
         } catch (e: MqttException) {
-            e.printStackTrace()
-        }
-    }
-
-    /**
-     * 关闭客户端
-     */
-    fun close() {
-        try {
-            mqttClient?.close()
-            mSubscribers.clear()
-        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -144,7 +152,20 @@ class MqttManager {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
 
+
+    /**
+     * 关闭MQTT客户端，再次使用需要重新创建
+     */
+    fun close() {
+        try {
+            mqttClient?.disconnect()
+            mqttClient?.unregisterResources()
+            mqttClient?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     /**

@@ -18,15 +18,15 @@ open class MqttSubscriber : IMqttSubscriber {
     override fun onConnectSuccess() {
     }
 
-    override fun onConnectionLost(throwable: Throwable) {
+    override fun onConnectionLost(throwable: Throwable?) {
     }
 
-    override fun onConnectFailed(throwable: Throwable) {
+    override fun onConnectFailed(throwable: Throwable?) {
     }
 
     override fun onSubscriberSuccess() {
     }
 
-    override fun onSubscriberFailed(exception: Throwable) {
+    override fun onSubscriberFailed(exception: Throwable?) {
     }
 }

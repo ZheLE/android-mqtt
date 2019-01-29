@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
                 showTips("服务器连接成功")
             }
 
-            override fun onConnectFailed(throwable: Throwable) {
-                showTips("服务器连接失败：${throwable.message}")
+            override fun onConnectFailed(throwable: Throwable?) {
+                showTips("服务器连接失败：${throwable?.message}")
             }
         })
     }
@@ -44,15 +44,15 @@ class MainActivity : AppCompatActivity() {
                 showTips("订阅成功")
             }
 
-            override fun onSubscriberFailed(exception: Throwable) {
-                showTips("订阅失败：${exception.message}")
+            override fun onSubscriberFailed(exception: Throwable?) {
+                showTips("订阅失败：${exception?.message}")
             }
 
             override fun onDeliveryComplete(message: String?) {
                 showTips("消息推送完毕：$message")
             }
 
-            override fun onConnectionLost(throwable: Throwable) {
+            override fun onConnectionLost(throwable: Throwable?) {
                 showTips("连接已断开")
             }
         })
@@ -67,10 +67,16 @@ class MainActivity : AppCompatActivity() {
     // 断开连接
     fun btnClose(view: View) {
         println(view)
-        MqttManager.getInstance().close()
+        MqttManager.getInstance().disconnect()
     }
 
     private fun showTips(msg: String?) {
         tvMessage?.text = msg
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MqttManager.getInstance().close()
     }
 }

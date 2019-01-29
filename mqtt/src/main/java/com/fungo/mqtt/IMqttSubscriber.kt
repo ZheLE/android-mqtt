@@ -33,12 +33,12 @@ interface IMqttSubscriber {
     /**
      * 服务器连接断开
      */
-    fun onConnectionLost(throwable: Throwable)
+    fun onConnectionLost(throwable: Throwable?)
 
     /**
      * 服务器连接失败
      */
-    fun onConnectFailed(throwable: Throwable)
+    fun onConnectFailed(throwable: Throwable?)
 
     /**
      * 订阅成功
@@ -48,5 +48,5 @@ interface IMqttSubscriber {
     /**
      * 订阅失败
      */
-    fun onSubscriberFailed(exception: Throwable)
+    fun onSubscriberFailed(exception: Throwable?)
 }

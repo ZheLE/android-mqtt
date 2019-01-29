@@ -63,7 +63,7 @@
 
       MqttManager.getInstance().disconnect()
 
-* 关闭MQTT客户端（一般app推出时调用）
+* 关闭MQTT客户端（一般app退出时调用）
 
       MqttManager.getInstance().close()
 

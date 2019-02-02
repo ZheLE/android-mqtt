@@ -1,4 +1,4 @@
-package com.fungo.mqtt
+package com.pingerx.mqtt
 
 
 /**

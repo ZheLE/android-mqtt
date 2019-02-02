@@ -1,9 +1,9 @@
-package com.fungo.sample
+package com.pingerx.sample
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.fungo.mqtt.MqttManager
+import com.pingerx.mqtt.MqttManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

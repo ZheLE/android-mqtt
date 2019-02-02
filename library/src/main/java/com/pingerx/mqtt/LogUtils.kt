@@ -1,4 +1,4 @@
-package com.fungo.mqtt
+package com.pingerx.mqtt
 
 import android.util.Log
 import org.json.JSONArray

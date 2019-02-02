@@ -1,4 +1,4 @@
-package com.fungo.mqtt
+package com.pingerx.mqtt
 
 import android.content.Context
 import org.eclipse.paho.android.service.MqttAndroidClient

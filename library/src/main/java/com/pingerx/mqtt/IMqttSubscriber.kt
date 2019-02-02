@@ -1,5 +1,4 @@
-package com.fungo.mqtt
-
+package com.pingerx.mqtt
 
 /**
  * @author Pinger

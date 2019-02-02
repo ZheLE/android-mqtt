@@ -13,16 +13,13 @@ import org.eclipse.paho.client.mqttv3.*
  */
 class MqttManager {
 
-    private val baseUrl = "tcp://iot.eclipse.org:1883"
-    private val userName = "admin"
-    private val password = "password"
-    private val clientId = "MqttAndroidClient"
-
+    private var mConfig: MqttConfig? = null
     private var mqttClient: MqttAndroidClient? = null
     private val mSubscribers = LinkedHashMap<String, MqttSubscriber>()
 
-    fun init(context: Context) {
-        mqttClient = MqttAndroidClient(context, baseUrl, clientId)
+    fun init(context: Context, config: MqttConfig) {
+        mConfig = config
+        mqttClient = MqttAndroidClient(context, config.getBaseUrl(), config.getClientId())
         mqttClient!!.setCallback(object : MqttCallbackExtended {
             override fun connectComplete(reconnect: Boolean, serverURI: String) {
                 if (reconnect) {
@@ -186,8 +183,8 @@ class MqttManager {
         return false
     }
 
-    fun getServerUrl(): String {
-        return baseUrl
+    fun getServerUrl(): String? {
+        return mConfig?.getBaseUrl()
     }
 
     fun getSubscribers(): LinkedHashMap<String, MqttSubscriber> {
@@ -201,8 +198,8 @@ class MqttManager {
         val options = MqttConnectOptions()
         options.isAutomaticReconnect = true
         options.isCleanSession = false
-        options.userName = userName
-        options.password = password.toCharArray()
+        options.userName = mConfig?.getUserName()
+        options.password = mConfig?.getPassword()?.toCharArray()
         return options
     }
 

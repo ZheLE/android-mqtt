@@ -1,6 +1,5 @@
 ## MQTT在Android上的二次封装
-[![](https://www.jitpack.io/v/PingerOne/MqttAndroid.svg)](https://www.jitpack.io/#PingerOne/MqttAndroid)
-
+ [ ![Download](https://api.bintray.com/packages/fungo/maven/mqtt-android/images/download.svg) ](https://bintray.com/fungo/maven/mqtt-android/_latestVersion)
 #### 添加依赖
 * 在project的build.gradle文件中添加maven仓库
 
@@ -11,12 +10,10 @@
           }
       }
 
-
-
 * 在app的build.gradle文件中添加依赖
 
       dependencies {
-          implementation 'com.github.PingerOne:MqttAndroid:1.0.x'
+          implementation 'com.pingerx:mqtt-android:1.0.x'
       }
 
 #### 使用流程

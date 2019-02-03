@@ -1,5 +1,8 @@
 ## MQTT在Android上的二次封装
- [ ![Download](https://api.bintray.com/packages/fungo/maven/mqtt-android/images/download.svg) ](https://bintray.com/fungo/maven/mqtt-android/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/fungo/maven/android-mqtt/images/download.svg) ](https://bintray.com/fungo/maven/android-mqtt/_latestVersion)
+
+
+
 #### 添加依赖
 * 在project的build.gradle文件中添加maven仓库
 
@@ -13,7 +16,7 @@
 * 在app的build.gradle文件中添加依赖
 
       dependencies {
-          implementation 'com.pingerx:mqtt-android:1.0.x'
+          implementation 'com.pingerx:android-mqtt:1.0.2'
       }
 
 #### 使用流程
@@ -37,7 +40,7 @@
 
 * 订阅一个话题
 
-      MqttManager.getInstance().subscribe(subscriptionTopic) {
+      MqttManager.getInstance().subscribe(topic) {
           onSubscriberSuccess {
               showTips("订阅成功")
           }
@@ -54,7 +57,7 @@
 
 * 推送一条消息
 
-      MqttManager.getInstance().publishMessage(publishTopic, "Hello Mqtt...")
+      MqttManager.getInstance().publishMessage(topic, "Hello Mqtt...")
 
 * 主动断开连接
 

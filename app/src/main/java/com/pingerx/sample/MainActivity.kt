@@ -3,6 +3,7 @@ package com.pingerx.sample
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.pingerx.mqtt.MqttConfig
 import com.pingerx.mqtt.MqttManager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // 初始化
-        MqttManager.getInstance().init(this)
+
+        MqttManager.getInstance().init(this, MqttConfig().create())
 
         showTips("服务器地址：${MqttManager.getInstance().getServerUrl()}")
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">mqtt-android</string>
+    <string name="app_name">android-mqtt</string>
     <string name="btn_click">点击按钮进行操作</string>
     <string name="btn_connect">连接</string>
     <string name="btn_subscribe">订阅</string>

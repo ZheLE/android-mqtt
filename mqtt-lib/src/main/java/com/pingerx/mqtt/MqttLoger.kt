@@ -8,10 +8,10 @@ import org.json.JSONObject
  * @author Pinger
  * @since 2018/4/27 21:53
  */
-object LogUtils {
+object MqttLoger {
 
     private var DEBUG = true
-    private const val TAG = "MQTT"
+    private const val TAG = "mqtt"
     private const val MIN_STACK_OFFSET = 3
     private const val METHOD_COUNT = 3
     private const val JSON_INDENT = 4
@@ -110,11 +110,11 @@ object LogUtils {
     }
 
     private fun log(logType: Int, msg: String?) {
-        log(TAG, logType, msg, true)
+        log(TAG, logType, msg, false)
     }
 
     private fun log(tag: String, logType: Int, msg: String?) {
-        log(tag, logType, msg, true)
+        log(tag, logType, msg, false)
     }
 
     private fun log(tag: String, logType: Int, msg: String?, showHeader: Boolean) {
@@ -184,7 +184,7 @@ object LogUtils {
             val element = trace[i]
             val name = element.className
 
-            if (name != LogUtils::class.java.name) {
+            if (name != MqttLoger::class.java.name) {
                 start = i
                 break
             }
@@ -195,5 +195,9 @@ object LogUtils {
     private fun getSimpleClassName(name: String): String {
         val lastIndex = name.lastIndexOf(".")
         return name.substring(lastIndex + 1)
+    }
+
+    fun setDebug(isDebug: Boolean) {
+        DEBUG = isDebug
     }
 }

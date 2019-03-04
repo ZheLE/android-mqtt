@@ -50,4 +50,8 @@ class MqttConfig {
     fun getClientId(): String {
         return clientId
     }
+
+    fun setDebug(isDebug: Boolean) {
+        MqttLoger.setDebug(isDebug)
+    }
 }

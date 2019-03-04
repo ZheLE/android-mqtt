@@ -20,7 +20,7 @@
 
 * 初始化MQTT
 
-      MqttManager.getInstance().init(context)
+      MqttManager.getInstance().init(context,config)
 
 
 * 连接MQTT服务端
@@ -37,7 +37,7 @@
 
 * 订阅一个话题
 
-      MqttManager.getInstance().subscribe(subscriptionTopic) {
+      MqttManager.getInstance().subscribe(topic) {
           onSubscriberSuccess {
               showTips("订阅成功")
           }
@@ -54,7 +54,7 @@
 
 * 推送一条消息
 
-      MqttManager.getInstance().publishMessage(publishTopic, "Hello Mqtt...")
+      MqttManager.getInstance().publishMessage(topic, "Hello Mqtt...")
 
 * 主动断开连接
 

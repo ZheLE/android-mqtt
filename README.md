@@ -1,5 +1,6 @@
 ## MQTT在Android上的二次封装
- [ ![Download](https://api.bintray.com/packages/fungo/maven/mqtt-android/images/download.svg) ](https://bintray.com/fungo/maven/mqtt-android/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/fungo/maven/android-mqtt/images/download.svg) ](https://bintray.com/fungo/maven/android-mqtt/_latestVersion)
+
 #### 添加依赖
 * 在project的build.gradle文件中添加maven仓库
 

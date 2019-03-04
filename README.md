@@ -13,7 +13,7 @@
 * 在app的build.gradle文件中添加依赖
 
       dependencies {
-          implementation 'com.pingerx:mqtt-android:1.0.x'
+          implementation 'com.pingerx:android-mqtt:1.0.4'
       }
 
 #### 使用流程

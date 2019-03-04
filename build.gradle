@@ -33,9 +33,9 @@ task clean(type: Delete) {
 
 ext {
     name = "android-mqtt"
-    version = "1.0.3"
+    version = "1.0.4"
     groupId = "com.pingerx"
-    artifactId = "mqtt"
+    artifactId = "android-mqtt"
     siteUrl = "https://github.com/pingerx/android-mqtt"
     gitUrl = "https://github.com/pingerx/android-mqtt.git"
 }
